@@ -1,5 +1,5 @@
 import re
-import numpy
+
 
 class Disk():
     def __init__(self, name):
@@ -20,12 +20,14 @@ class Disk():
     def child_count(self):
         return len(self.subnodes)
 
+
 suspicious = None
+
 
 def search(node):
     global suspicious
 
-    if node.child_count >= 3:
+    if node.child_count > 1:
         weight_pairs = [(sub, sub.total_weight) for sub in node.subnodes]
         weight_pairs.sort(key=lambda x: x[1])
 
@@ -48,8 +50,7 @@ def search(node):
             else:
                 return
     else:
-        for n in node.subnodes:
-            search(n)
+        return
 
 
 def main():
